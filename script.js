@@ -428,3 +428,116 @@ function calculateROI() {
     document.getElementById("roiPercent").innerText =
         roi.toFixed(0) + "%";
 }
+
+/* ===============================
+   FEATURED VIDEOS + MODAL PLAYER
+================================= */
+(function initPortfolioVideos() {
+    const detectedVideoPaths = [
+        "Presenter_introducing_software_e\u2026_202607070248.mp4",
+        "Digital_avatar_delivering_market\u2026_202607070252.mp4",
+        "Digital_avatar_delivering_pitch_202607070256.mp4"
+    ];
+
+    const heroVideo = document.getElementById("heroBackgroundVideo");
+    const heroOpenButton = document.getElementById("heroVideoOpenButton");
+    const previewVideos = document.querySelectorAll(".video-preview");
+    const videoCards = document.querySelectorAll(".video-card");
+    const modal = document.getElementById("videoModal");
+    const modalDialog = modal?.querySelector(".video-modal-dialog");
+    const modalCloseButton = document.getElementById("videoModalClose");
+    const modalVideo = document.getElementById("fullscreenVideoPlayer");
+    const modalTitle = document.getElementById("videoModalTitle");
+
+    if (!heroVideo || !modal || !modalVideo || detectedVideoPaths.length < 3) {
+        return;
+    }
+
+    let lastFocusedElement = null;
+
+    function assignVideoSource(videoElement, sourcePath) {
+        if (!videoElement || !sourcePath) return;
+        videoElement.src = sourcePath;
+        videoElement.load();
+    }
+
+    function openVideoModal(videoPath, titleText) {
+        if (!videoPath) return;
+
+        lastFocusedElement = document.activeElement;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+
+        modalVideo.src = videoPath;
+        modalVideo.muted = false;
+        modalVideo.volume = 1;
+        modalVideo.currentTime = 0;
+        modalVideo.load();
+        modalVideo.play().catch(() => {});
+
+        if (modalTitle && titleText) {
+            modalTitle.textContent = titleText;
+        }
+
+        modalCloseButton?.focus();
+    }
+
+    function closeVideoModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.load();
+
+        if (lastFocusedElement instanceof HTMLElement) {
+            lastFocusedElement.focus();
+        }
+    }
+
+    function getCardTitle(cardElement) {
+        return cardElement?.querySelector("h3")?.textContent?.trim() || "Project Video";
+    }
+
+    function handleCardActivation(cardElement) {
+        const index = Number(cardElement?.dataset.videoIndex);
+        const path = detectedVideoPaths[index];
+        if (!Number.isNaN(index) && path) {
+            openVideoModal(path, getCardTitle(cardElement));
+        }
+    }
+
+    assignVideoSource(heroVideo, detectedVideoPaths[0]);
+
+    previewVideos.forEach((videoElement, index) => {
+        assignVideoSource(videoElement, detectedVideoPaths[index]);
+    });
+
+    heroOpenButton?.addEventListener("click", () => {
+        openVideoModal(detectedVideoPaths[0], "Hero Project Video");
+    });
+
+    videoCards.forEach((cardElement) => {
+        cardElement.addEventListener("click", () => handleCardActivation(cardElement));
+        cardElement.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleCardActivation(cardElement);
+            }
+        });
+    });
+
+    modalCloseButton?.addEventListener("click", closeVideoModal);
+    modal.addEventListener("click", (event) => {
+        if (!modalDialog?.contains(event.target)) {
+            closeVideoModal();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+            closeVideoModal();
+        }
+    });
+})();

@@ -188,9 +188,9 @@ body.light-mode {
     <!-- NAV LINKS -->
     <div class="nav-links" id="navLinks">
         <a href="#about">About Me</a>
-        <a href="#lab">The Lab</a>
-        <a href="#contact">Contact</a>
-        <button class="book-btn"><a href="https://wa.link/bqwdyl">Book a Call</a></button>
+        <a href="#lab">AI Lab</a>
+        <a href="https://wa.link/bqwdyl" target="_blank">Contact</a>
+        <button class="book-btn"><a href="https://wa.link/bqwdyl" target="_blank">Book a Call</a></button>
         <span class="toggle" id="themeToggle">🌙</span>
     </div>
 
@@ -236,12 +236,22 @@ themeToggle.addEventListener("click", () => {
 </script>
 
 <section class="hero">
+    <div class="hero-video-layer" aria-hidden="true">
+        <video class="hero-background-video" id="heroBackgroundVideo" autoplay muted loop playsinline preload="auto"></video>
+        <button
+            type="button"
+            class="hero-video-hitbox"
+            id="heroVideoOpenButton"
+            aria-label="Open hero video in fullscreen player">
+        </button>
+    </div>
+    <div class="hero-video-overlay" aria-hidden="true"></div>
 
     <div class="hero-content">
 
         <h1>
             I Build <span class="gradient-text">AI-Powered</span><br>
-            Web Applications
+            Web and Mobile Applications
         </h1>
 
         <p id="typing-text"></p>
@@ -253,11 +263,56 @@ themeToggle.addEventListener("click", () => {
 
     </div>
 
-    <div class="hero-image">
-        <img src="image/wordcamp (1).png" alt="Emmanuel at WordCamp">
+</section>
+
+<section class="featured-videos" id="featured-videos" aria-labelledby="featuredVideosTitle">
+    <div class="featured-videos-header">
+        <h2 id="featuredVideosTitle">Featured Project Videos</h2>
+        <p>
+            Explore highlights of my software development work, UI designs, web applications, and creative solutions through these featured videos.
+        </p>
     </div>
 
+    <div class="featured-videos-grid" id="featuredVideosGrid">
+        <article class="video-card" data-video-index="0" tabindex="0" role="button" aria-label="Open project video 1">
+            <div class="video-card-media">
+                <video class="video-preview" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="video-card-content">
+                <h3>Full Stack Web Application</h3>
+                <p>Modern responsive web application showcasing frontend development, backend integration, responsive layouts, and premium UI/UX.</p>
+            </div>
+        </article>
+
+        <article class="video-card" data-video-index="1" tabindex="0" role="button" aria-label="Open project video 2">
+            <div class="video-card-media">
+                <video class="video-preview" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="video-card-content">
+                <h3>AI Product Demo Experience</h3>
+                <p>Interactive AI-driven product walkthrough with seamless storytelling, smooth transitions, and polished user interface motion.</p>
+            </div>
+        </article>
+
+        <article class="video-card" data-video-index="2" tabindex="0" role="button" aria-label="Open project video 3">
+            <div class="video-card-media">
+                <video class="video-preview" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="video-card-content">
+                <h3>Creative Software Showcase</h3>
+                <p>Creative engineering presentation featuring design systems, application logic, and performance-focused development delivery.</p>
+            </div>
+        </article>
+    </div>
 </section>
+
+<div class="video-modal" id="videoModal" aria-hidden="true">
+    <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+        <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Close video player">×</button>
+        <h2 id="videoModalTitle">Project Video</h2>
+        <video id="fullscreenVideoPlayer" controls playsinline preload="auto"></video>
+    </div>
+</div>
 
 <!-- AI Revenue Impact Calculator Section with Live AI Glow Particles -->
 <section class="ai-calc-section">
@@ -583,7 +638,7 @@ themeToggle.addEventListener("click", () => {
     <div class="section-header">
         <h2>AI Solutions That Drive Revenue & Automation</h2>
         <p>
-            From intelligent web platforms to AI automation systems, I design
+            From intelligent web and mobile platforms to AI automation systems, I design
             scalable digital solutions that help businesses grow and operate smarter.
         </p>
     </div>
@@ -593,7 +648,7 @@ themeToggle.addEventListener("click", () => {
         <!-- SERVICE 1 -->
         <div class="service-card">
             <div class="icon">🤖</div>
-            <h3>AI-Powered Web Applications</h3>
+            <h3>AI-Powered Web and Mobile Applications</h3>
             <p>
                 Custom AI-driven dashboards, SaaS platforms, and smart systems
                 built to optimize business performance.
@@ -659,7 +714,7 @@ themeToggle.addEventListener("click", () => {
 
 <section class="packages-section" id="packages">
 
-    <h2 class="packages-title">Website Solutions Built For Growth</h2>
+    <h2 class="packages-title">Tech Solutions Built For Growth</h2>
     <p class="packages-subtitle">
         Choose the perfect digital engine to scale your business in Port Harcourt and globally.
     </p>
@@ -669,15 +724,15 @@ themeToggle.addEventListener("click", () => {
         <!-- BASIC WEBSITE -->
         <div class="service-card basic">
 
-            <h3>Premium Static Website</h3>
-            <p class="tagline">Perfect for startups & small businesses</p>
+            <h3>Premium Static Web/Mobile App</h3>
+            <p class="tagline">Perfect for local shops & small businesses</p>
 
             <ul>
                 <li>✔ Responsive Modern Design</li>
                 <li>✔ WhatsApp API Integration</li>
                 <li>✔ Smart Contact Forms</li>
                 <li>✔ Fast Loading Optimized Code</li>
-                <li>✔ On-Page SEO Optimization</li>
+                <li>✔ On-Page SEO</li>
                 <li>✔ Google Search Console Setup</li>
                 <li>✔ Hosting Deployment Support</li>
                 <li class="bonus">🎁 1 Week Free Meta Ads Campaign</li>
@@ -693,8 +748,8 @@ themeToggle.addEventListener("click", () => {
 
             <div class="badge">Most Popular</div>
 
-            <h3>Dynamic Business Website</h3>
-            <p class="tagline">Built for scaling brands & serious companies</p>
+            <h3>Dynamic Business Web/Mobile App</h3>
+            <p class="tagline">Perfect for scaling brands, SaaS platforms, tech startups & serious companies</p>
 
             <ul>
                 <li>✔ Everything in Static Package</li>
@@ -703,7 +758,7 @@ themeToggle.addEventListener("click", () => {
                 <li>✔ Database Integration</li>
                 <li>✔ Payment Gateway Integration</li>
                 <li>✔ User Authentication System</li>
-                <li>✔ Advanced SEO Optimization</li>
+                <li>✔ Advanced SEO</li>
                 <li class="bonus">🎁 1 Month Free Meta Ads Campaign</li>
             </ul>
 
@@ -715,7 +770,7 @@ themeToggle.addEventListener("click", () => {
         <!-- AI POWERED WEBSITE -->
         <div class="service-card ai">
 
-            <h3>AI Powered Intelligent Website</h3>
+            <h3>AI Powered Intelligent Web/Mobile App</h3>
             <p class="tagline">Next-level automation & digital intelligence</p>
 
             <ul>
@@ -725,7 +780,7 @@ themeToggle.addEventListener("click", () => {
                 <li>✔ Smart Recommendation Engine</li>
                 <li>✔ Predictive Analytics Dashboard</li>
                 <li>✔ Conversion Tracking System</li>
-                <li>✔ Full Technical SEO Optimization</li>
+                <li>✔ Full Technical SEO</li>
                 <li class="bonus">🎁 3 Months Free Meta Ads Campaign</li>
             </ul>
 
@@ -739,7 +794,7 @@ themeToggle.addEventListener("click", () => {
 
 <section class="roi-section">
 
-    <h2 class="section-title">Estimate Your ROI with Our Website Solutions</h2>
+    <h2 class="section-title">Estimate Your ROI with Our Digital Solutions</h2>
 
     <div class="roi-card">
 
@@ -749,9 +804,9 @@ themeToggle.addEventListener("click", () => {
             <input type="number" id="conversionRate" placeholder="Current Conversion Rate (%)">
 
             <select id="websiteType">
-                <option value="static">Premium Static Website</option>
-                <option value="dynamic">Dynamic Website</option>
-                <option value="ai">AI Powered Website</option>
+                <option value="static">Premium Static App</option>
+                <option value="dynamic">Dynamic App</option>
+                <option value="ai">AI Powered App</option>
             </select>
 
             <button onclick="calculateROI()">Calculate Growth</button>
@@ -800,7 +855,7 @@ themeToggle.addEventListener("click", () => {
     <div class="course-card">
       <h3 class="course-title">Web Development</h3>
       <p class="course-desc">
-        Build modern, high-performance websites and web apps using HTML, CSS, JavaScript, React, Python(Flask) and MySQL. Gain skills to launch your own projects or work with global clients with confidence and speed.
+        Build modern, high-performance and scalable apps using React, Tailwind CSS, Nodejs and MongoDB. Gain skills to launch your own projects or work with global clients with confidence and speed.
       </p>
       <a href="https://wa.link/bqwdyl" class="course-btn" target="_blank">Enroll Now</a>
     </div>
@@ -922,17 +977,17 @@ themeToggle.addEventListener("click", () => {
 
         <!-- CASE 1 -->
         <div class="case-card">
-            <img src="case1.jpg" alt="AI Automation Project">
+            <img src="image/screencapture-localhost-5173-2026-04-03-02_47_02.png" alt="AI Automation Project">
 
             <div class="case-content">
-                <h3>AI Automation for Logistics Company</h3>
-                <p>Reduced manual dispatch processes using AI workflow automation.</p>
+                <h3>AI School Management System</h3>
+                <p>Reduced manual school operations and increased overall efficiency.</p>
 
                 <button class="view-case"
-                    data-title="AI Automation for Logistics Company"
-                    data-problem="The company manually processed delivery scheduling leading to delays and errors."
-                    data-solution="Built a custom AI workflow system that automated scheduling and optimized routes."
-                    data-tech="HTML, CSS, JS, Python API Integration"
+                    data-title="AI School Management System"
+                    data-problem="Schools manually processed data, results and communication with parents."
+                    data-solution="Built a custom AI workflow system that automated results, communication and overall school management."
+                    data-tech="React, NodeJS, API Integration"
                     data-result="Reduced operational time by 60% and increased efficiency by 40%.">
                     View Case Study
                 </button>
@@ -941,18 +996,18 @@ themeToggle.addEventListener("click", () => {
 
         <!-- CASE 2 -->
         <div class="case-card">
-            <img src="case2.jpg" alt="AI SaaS Platform">
+            <img src="image/screencapture-localhost-5173-renter-2026-04-03-02_48_52.png" alt="AI SaaS Platform">
 
             <div class="case-content">
-                <h3>AI-Powered SaaS Dashboard</h3>
-                <p>Custom intelligent analytics platform for business insights.</p>
+                <h3>AI-Powered Property Platform</h3>
+                <p>Custom intelligent property platform for landlords and renters.</p>
 
                 <button class="view-case"
-                    data-title="AI-Powered SaaS Dashboard"
-                    data-problem="Business lacked centralized data analytics."
-                    data-solution="Designed scalable dashboard integrating AI data analysis modules."
-                    data-tech="JavaScript, REST API, Cloud Database"
-                    data-result="Improved data visibility by 75% and reduced reporting time.">
+                    data-title="AI-Powered Property Platform"
+                    data-problem="Nigeria lacks a centralized platform that saves renters the cost of agents."
+                    data-solution="Designed scalable dashboards for landlords to post property and renters to contact landlords directly."
+                    data-tech="React, Nodejs, REST API, Cloud Database"
+                    data-result="Improved housing expirience by 75% and reduced renting cost for renters.">
                     View Case Study
                 </button>
             </div>
@@ -1228,7 +1283,7 @@ themeToggle.addEventListener("click", () => {
 
         <div class="testimonial-card">
             <div class="client-info">
-                <img src="avatar1.jpg" alt="Client">
+                <img src="image/wordcamp (1).png" alt="Client">
                 <div>
                     <h4>Logistics Manager</h4>
                     <span>Port Harcourt</span>
@@ -1240,7 +1295,7 @@ themeToggle.addEventListener("click", () => {
 
         <div class="testimonial-card">
             <div class="client-info">
-                <img src="avatar2.jpg" alt="Client">
+                <img src="image/landlord (1).png" alt="Client">
                 <div>
                     <h4>Startup Founder</h4>
                     <span>Tech Industry</span>
@@ -1252,7 +1307,7 @@ themeToggle.addEventListener("click", () => {
 
         <div class="testimonial-card">
             <div class="client-info">
-                <img src="avatar3.jpg" alt="Client">
+                <img src="image/property manager (1).png" alt="Client">
                 <div>
                     <h4>Real Estate Director</h4>
                     <span>Lagos</span>
@@ -1264,7 +1319,7 @@ themeToggle.addEventListener("click", () => {
 
         <div class="testimonial-card">
             <div class="client-info">
-                <img src="avatar4.jpg" alt="Client">
+                <img src="image/wordcamp (1).png" alt="Client">
                 <div>
                     <h4>E-commerce Owner</h4>
                     <span>Retail</span>
@@ -1276,7 +1331,7 @@ themeToggle.addEventListener("click", () => {
 
         <div class="testimonial-card">
             <div class="client-info">
-                <img src="avatar5.jpg" alt="Client">
+                <img src="image/landlord (1).png" alt="Client">
                 <div>
                     <h4>Fintech CEO</h4>
                     <span>Financial Services</span>
@@ -1317,7 +1372,7 @@ let autoScroll = setInterval(() => {
       <a href="#about">About</a>
       <a href="#skills-map">Skills</a>
       <a href="#courses">Courses</a>
-      <a href="#contact">Contact</a>
+      <a href="https://wa.link/bqwdyl" target="_blank">Contact</a>
     </div>
 
     <!-- Social & Contact -->

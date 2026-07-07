@@ -11,10 +11,15 @@
     gap: 50px;
     background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.2), transparent 40%),
                 radial-gradient(circle at 80% 80%, rgba(123,63,0,0.2), transparent 40%);
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
     flex: 1;
+    position: relative;
+    z-index: 3;
+    max-width: 760px;
 }
 
 .hero-content h1 {
@@ -71,19 +76,186 @@
     background: rgba(255,255,255,0.15);
 }
 
-/* IMAGE */
+/* HERO VIDEO */
 
-.hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+.hero-video-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
 }
 
-.hero-image img {
+.hero-background-video {
     width: 100%;
-    max-width: 500px;
+    height: 100%;
+    object-fit: cover;
+    transform: translateZ(0);
+}
+
+.hero-video-hitbox {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.54);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* FEATURED VIDEOS */
+
+.featured-videos {
+    padding: 100px 5%;
+    position: relative;
+}
+
+.featured-videos-header {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+.featured-videos-header h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 14px;
+}
+
+.featured-videos-header p {
+    opacity: 0.84;
+    line-height: 1.7;
+}
+
+.featured-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.video-card {
     border-radius: 20px;
-    box-shadow: 0 0 60px rgba(59,130,246,0.3);
+    background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+    transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    cursor: pointer;
+}
+
+.video-card:hover,
+.video-card:focus-visible {
+    transform: translate3d(0, -8px, 0);
+    box-shadow: 0 18px 50px rgba(59,130,246,0.3);
+    border-color: rgba(129, 140, 248, 0.65);
+    outline: none;
+}
+
+.video-card-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+.video-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 420ms ease;
+}
+
+.video-card:hover .video-preview,
+.video-card:focus-visible .video-preview {
+    transform: scale(1.06);
+}
+
+.video-card-content {
+    padding: 18px 18px 22px;
+}
+
+.video-card-content h3 {
+    margin: 0 0 10px;
+    font-size: 1.16rem;
+}
+
+.video-card-content p {
+    margin: 0;
+    opacity: 0.86;
+    line-height: 1.55;
+}
+
+/* VIDEO MODAL */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 7, 18, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 260ms ease, visibility 260ms ease;
+    z-index: 1200;
+}
+
+.video-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.video-modal-dialog {
+    width: min(1040px, 100%);
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 20px;
+    padding: 52px 16px 16px;
+    position: relative;
+    transform: translate3d(0, 12px, 0);
+    transition: transform 260ms ease;
+}
+
+.video-modal.is-open .video-modal-dialog {
+    transform: translate3d(0, 0, 0);
+}
+
+.video-modal-dialog h2 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+.video-modal-dialog video {
+    width: 100%;
+    max-height: 78vh;
+    border-radius: 14px;
+    background: #000;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(15,23,42,0.9);
+    color: #fff;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
 }
 
 /* RESPONSIVE */
@@ -100,6 +272,16 @@
 
     .hero-content h1 {
         font-size: 36px;
+    }
+
+    .featured-videos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media(max-width: 680px) {
+    .featured-videos-grid {
+        grid-template-columns: 1fr;
     }
 }
 
