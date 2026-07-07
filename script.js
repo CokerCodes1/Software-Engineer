@@ -210,20 +210,53 @@ window.addEventListener('scroll', () => {
     }
 });
 
-fetch("https://api.github.com/users/akachi-stack")
-    .then(response => response.json())
-    .then(data => {
-        if(data.public_repos !== undefined) {
-            document.getElementById("githubRepos").innerText = data.public_repos;
-        } else {
-            document.getElementById("githubRepos").innerText = "0";
-            console.warn("GitHub API did not return repo count:", data);
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching GitHub data:", error);
-        document.getElementById("githubRepos").innerText = "0";
-    });
+/* ===============================
+   GITHUB REPOSITORY COUNT
+================================= */
+
+const GITHUB_USERNAME = "CokerCodes1";
+const GITHUB_REFRESH_MS = 5 * 60 * 1000;
+
+function updateGitHubRepoCount() {
+    const repoCountElement = document.getElementById("githubRepos");
+    if (!repoCountElement) return;
+
+    fetch(`https://api.github.com/users/${GITHUB_USERNAME}`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`GitHub API responded with ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (typeof data.public_repos === "number") {
+                repoCountElement.textContent = data.public_repos;
+                repoCountElement.dataset.loaded = "true";
+            } else {
+                console.warn("GitHub API did not return repo count:", data);
+                if (!repoCountElement.dataset.loaded) {
+                    repoCountElement.textContent = "0";
+                }
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching GitHub data:", error);
+            if (!repoCountElement.dataset.loaded) {
+                repoCountElement.textContent = "0";
+            }
+        });
+}
+
+updateGitHubRepoCount();
+setInterval(updateGitHubRepoCount, GITHUB_REFRESH_MS);
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        updateGitHubRepoCount();
+    }
+});
+
+window.addEventListener("focus", updateGitHubRepoCount);
 
     /* ===============================
    EXPAND / COLLAPSE LOGIC
