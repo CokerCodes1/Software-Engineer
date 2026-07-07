@@ -237,7 +237,9 @@ themeToggle.addEventListener("click", () => {
 
 <section class="hero">
     <div class="hero-video-layer" aria-hidden="true">
-        <video class="hero-background-video" id="heroBackgroundVideo" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hero-background-video" id="heroBackgroundVideo" data-video-src="videos/hero-intro.mp4" autoplay muted loop playsinline preload="auto">
+            <source src="videos/hero-intro.mp4" type="video/mp4">
+        </video>
         <button
             type="button"
             class="hero-video-hitbox"
@@ -274,9 +276,11 @@ themeToggle.addEventListener("click", () => {
     </div>
 
     <div class="featured-videos-grid" id="featuredVideosGrid">
-        <article class="video-card" data-video-index="0" tabindex="0" role="button" aria-label="Open project video 1">
+        <article class="video-card" data-video-src="videos/hero-intro.mp4" tabindex="0" role="button" aria-label="Open project video 1">
             <div class="video-card-media">
-                <video class="video-preview" autoplay muted loop playsinline preload="metadata"></video>
+                <video class="video-preview" data-video-src="videos/hero-intro.mp4" autoplay muted loop playsinline preload="metadata">
+                    <source src="videos/hero-intro.mp4" type="video/mp4">
+                </video>
             </div>
             <div class="video-card-content">
                 <h3>Full Stack Web Application</h3>
@@ -284,9 +288,11 @@ themeToggle.addEventListener("click", () => {
             </div>
         </article>
 
-        <article class="video-card" data-video-index="1" tabindex="0" role="button" aria-label="Open project video 2">
+        <article class="video-card" data-video-src="videos/market-demo.mp4" tabindex="0" role="button" aria-label="Open project video 2">
             <div class="video-card-media">
-                <video class="video-preview" autoplay muted loop playsinline preload="metadata"></video>
+                <video class="video-preview" data-video-src="videos/market-demo.mp4" autoplay muted loop playsinline preload="metadata">
+                    <source src="videos/market-demo.mp4" type="video/mp4">
+                </video>
             </div>
             <div class="video-card-content">
                 <h3>AI Product Demo Experience</h3>
@@ -294,9 +300,11 @@ themeToggle.addEventListener("click", () => {
             </div>
         </article>
 
-        <article class="video-card" data-video-index="2" tabindex="0" role="button" aria-label="Open project video 3">
+        <article class="video-card" data-video-src="videos/pitch-demo.mp4" tabindex="0" role="button" aria-label="Open project video 3">
             <div class="video-card-media">
-                <video class="video-preview" autoplay muted loop playsinline preload="metadata"></video>
+                <video class="video-preview" data-video-src="videos/pitch-demo.mp4" autoplay muted loop playsinline preload="metadata">
+                    <source src="videos/pitch-demo.mp4" type="video/mp4">
+                </video>
             </div>
             <div class="video-card-content">
                 <h3>Creative Software Showcase</h3>
