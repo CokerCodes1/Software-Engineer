@@ -302,9 +302,33 @@
     gap: 14px;
 }
 
-.brand-video-meta span:first-child {
+.brand-video-meta span:first-child,
+.brand-video-link {
     font-weight: 600;
     color: #93c5fd;
+}
+
+.brand-video-link {
+    pointer-events: auto;
+    text-decoration: none;
+    transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+
+.brand-video-link:hover,
+.brand-video-link:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+    outline: none;
+}
+
+.brand-video-showcase--glowpro .brand-video-badge {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.brand-video-showcase--glowpro .brand-video-showcase-content h3 {
+    background: linear-gradient(90deg, #ffffff, #6ee7b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .brand-video-cta {

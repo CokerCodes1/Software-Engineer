@@ -49,7 +49,7 @@ typeEffect();
     const heroOpenButton = document.getElementById("heroVideoOpenButton");
     const previewVideos = document.querySelectorAll(".video-preview");
     const videoCards = document.querySelectorAll(".video-card");
-    const brandShowcase = document.querySelector(".brand-video-showcase");
+    const brandShowcases = document.querySelectorAll(".brand-video-showcase");
     const modal = document.getElementById("videoModal");
     const modalDialog = modal?.querySelector(".video-modal-dialog");
     const modalCloseButton = document.getElementById("videoModalClose");
@@ -163,13 +163,21 @@ typeEffect();
         });
     });
 
-    if (brandShowcase) {
-        brandShowcase.addEventListener("click", () => handleVideoActivation(brandShowcase));
-        brandShowcase.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                handleVideoActivation(brandShowcase);
-            }
+    if (brandShowcases.length) {
+        brandShowcases.forEach((showcaseElement) => {
+            showcaseElement.addEventListener("click", () => handleVideoActivation(showcaseElement));
+            showcaseElement.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleVideoActivation(showcaseElement);
+                }
+            });
+        });
+
+        document.querySelectorAll(".brand-video-link").forEach((linkElement) => {
+            linkElement.addEventListener("click", (event) => {
+                event.stopPropagation();
+            });
         });
     }
 
