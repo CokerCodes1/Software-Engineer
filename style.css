@@ -673,9 +673,14 @@
     }
 
     .about-cta-btn {
-        width: 100%;
-        max-width: 320px;
+        width: 30%;
+        max-width: none;
+        padding: 12px 10px;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        white-space: normal;
         text-align: center;
+        box-sizing: border-box;
     }
 }
 
